@@ -31,6 +31,10 @@ body {
     --white: hsl(0, 0%, 100%);
 }
 
+label {
+    cursor: pointer;
+}
+
 /* specific styles */
 
 main {
@@ -175,6 +179,11 @@ button {
     font-weight: 500;
 }
 
+.small {
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+
 /* switch */
 
 /* step 1 section */
@@ -263,6 +272,34 @@ button {
 
 .switch {
     margin: 0 3rem;
+    width: 40px;
+    height: 20px;
+    background: var(--marine-blue);
+    border-radius: 1rem;
+    position: relative;
+}
+
+.switch input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.switch::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    transform: translateX(30%) translateY(-50%);
+    background: var(--white);
+    transition: transform 0.2s ease-in-out;
+}
+
+.switch:has(input:checked)::before {
+    transform: translateX(155%) translateY(-50%);
 }
 
 /* step 3 section */
@@ -295,6 +332,113 @@ button {
 
 .step-3-section .form-body label div {
     width: 75%;
+}
+
+.step-3-section input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    height: 1.7em;
+    width: 1.7em;
+
+    border-radius: 5px;
+    border: 1px var(--light-gray) solid;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s background ease-in-out;
+}
+
+.step-3-section input[type="checkbox"]:checked {
+    background: var(--purplish-blue);
+    border: 1px var(--purplish-blue) solid;
+}
+
+.step-3-section input[type="checkbox"]::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: url(./images/icon-checkmark.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    offset-position: bottom left;
+    transform: scale(0);
+    transition: 0.2s transform ease-in-out;
+}
+
+.step-3-section input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+/* step 4 section */
+
+.step-4-section .form-body {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.plan-add-ons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 3rem;
+    background: var(--alabaster);
+}
+
+.confirm-plan {
+    border-bottom: 0.5px solid var(--cool-gray);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+.confirm-add-ons {
+    margin-top: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.confirm-add-ons div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.confirm-add-ons div + div {
+    margin-top: 1rem;
+}
+
+.confirm-total {
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* step 5 */
+
+.step-5-section .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.thank-you {
+    height: 80px;
+    margin-bottom: 3rem;
+}
+
+.step-5-section .container h1 {
+    margin-bottom: 2rem;
+    color: var(--marine-blue);
 }
 
 /* media queries */
