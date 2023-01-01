@@ -2,14 +2,36 @@
 
 let nextBtnsEl = document.querySelectorAll(".next-btn")
 let backBtnsEl = document.querySelectorAll(".back-btn")
+let plansEl = document.querySelectorAll(".plans > div")
 let forms = document.querySelectorAll("form")
+let switchInputEl = document.querySelector(".switch input")
+let periodPlanMonthly = document.querySelector(".period-plan-monthly")
+let periodPlanYearly = document.querySelector(".period-plan-yearly")
+let addOnsEl = document.querySelectorAll(".step-3-section label input")
+let twoMonthsFreeEl = document.querySelectorAll(".two-months-free")
+let plansPrices = document.querySelectorAll(".plans .gray-text")
+let addOnsPrices = document.querySelectorAll(".step-3-section label .purple-text")
 
+// global variables
+let selectedPlanClass = "arcade-plan"
+let period = "monthly"
+let addons = []
 
 // event listeners
 
 forms.forEach(form => {
     form.addEventListener("submit", (e) => {
         e.preventDefault()
+        if (form.parentElement.parentElement.classList.contains("step-3-section")) {
+            addOnsEl.forEach(addon => {
+                if (addon.checked) {
+                    addons.push(addon.value)
+                }
+            })
+        }
+        if (form.parentElement.parentElement.classList.contains("step-3-section")) {
+            console.log(selectedPlanClass, period, addons)
+        }
     })
 })
 
@@ -25,8 +47,31 @@ backBtnsEl.forEach(btn => {
     })
 })
 
+plansEl.forEach(plan => {
+    plan.addEventListener("click", (e) => {
+        selectPlan(e)
+    })
+})
+
+switchInputEl.addEventListener("click", (e) => {
+    if (e.target.checked == true) {
+        period = "yearly"
+        periodPlanMonthly.classList = "period-plan-monthly gray-text-bold"
+        periodPlanYearly.classList = "period-plan-yearly bold-blue-text"
+    } else {
+        period = "monthly"
+        periodPlanMonthly.classList = "period-plan-monthly bold-blue-text"
+        periodPlanYearly.classList = "period-plan-yearly gray-text-bold"
+    }
+    toggleTwoMonths()
+    togglePrices(period)
+})
+
+
+
 
 // functions
+
 function returnNumberOfStep(event) {
     let regex = /\d+/;
     let classOfStep = event.target.parentElement.parentElement.parentElement.parentElement.classList.value
@@ -71,6 +116,9 @@ function changeSelectedStep(event, action) {
     }
     // query selectors
     let stepSectionEl = document.querySelector(`.step-${newNumber}-section`)
+    if (event.target.classList.contains("confirm-btn")) {
+        stepSectionEl = document.querySelector(".step-5-section")
+    }
     let stepLinkEl = document.querySelectorAll(".step-link")[newNumber-1]
     // making sure there is no active step links and step sections 
     clearAllStepLinks()
@@ -78,6 +126,44 @@ function changeSelectedStep(event, action) {
     // activating step link and step section
     stepSectionEl.classList.add("active")
     stepLinkEl.classList.add("selected-step")
+}
+
+function clearAllPlans() {
+    plansEl.forEach(plan => {
+        plan.classList.remove("selected-plan")
+    })
+}
+
+function selectPlan(event) {
+    selectedPlanClass = `${event.target.classList[0]}`
+    let selectedPlanEl = document.querySelector(`.${selectedPlanClass}`)
+    clearAllPlans()
+    selectedPlanEl.classList.add("selected-plan")
+}
+
+function toggleTwoMonths() {
+    twoMonthsFreeEl.forEach(el => {
+        el.classList.toggle("visible")
+    })
+}
+
+function togglePrices(p) {
+    if (p == "yearly") {
+        plansPrices[0].innerHTML = "$90/yr"
+        plansPrices[1].innerHTML = "$120/yr"
+        plansPrices[2].innerHTML = "$150/yr"
+        addOnsPrices[0].innerHTML = "+$10/yr"
+        addOnsPrices[1].innerHTML = "+$20/yr"
+        addOnsPrices[2].innerHTML = "+$20/yr"
+    } else {
+        plansPrices[0].innerHTML = "$9/mo"
+        plansPrices[1].innerHTML = "$12/mo"
+        plansPrices[2].innerHTML = "$15/mo"
+        addOnsPrices[0].innerHTML = "+$1/mo"
+        addOnsPrices[1].innerHTML = "+$2/mo"
+        addOnsPrices[2].innerHTML = "+$2/mo"
+    }
+    
 }
 
 

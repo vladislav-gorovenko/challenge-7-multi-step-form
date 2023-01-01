@@ -174,6 +174,12 @@ button {
     font-weight: 400;
     color: var(--cool-gray);
 }
+
+.gray-text-bold {
+    font-weight: 500;
+    color: var(--cool-gray);
+}
+
 .purple-text {
     color: var(--purplish-blue);
     font-weight: 500;
@@ -243,6 +249,11 @@ button {
     padding-top: 2.5rem;
 }
 
+.plans .selected-plan {
+    background: var(--alabaster);
+    border: 1px solid var(--purplish-blue);
+}
+
 .plans > div {
     border-radius: 0.5rem;
     padding: 2rem;
@@ -253,6 +264,12 @@ button {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+
+    overflow: hidden;
+}
+
+.plans > div * {
+    pointer-events: none;
 }
 
 .plans > div:hover {
@@ -268,6 +285,10 @@ button {
     justify-content: center;
 
     border-radius: 1rem;
+}
+
+.period-plan-monthly, .period-plan-yearly {
+    transition: color 0.3s ease-in;
 }
 
 .switch {
@@ -300,6 +321,17 @@ button {
 
 .switch:has(input:checked)::before {
     transform: translateX(155%) translateY(-50%);
+}
+
+.two-months-free {
+    color: var(--marine-blue);
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    display: none;
+}
+
+.visible {
+    display: block;
 }
 
 /* step 3 section */
@@ -372,6 +404,10 @@ button {
     transform: scale(1);
 }
 
+.step-3-section label * {
+    pointer-events: none;
+}
+
 /* step 4 section */
 
 .step-4-section .form-body {
@@ -394,6 +430,10 @@ button {
     justify-content: space-between;
     align-items: center;
     padding-bottom: 2rem;
+}
+
+.confirm-plan a:hover {
+    color: var(--purplish-blue);
 }
 
 .confirm-add-ons {
@@ -421,6 +461,14 @@ button {
     justify-content: space-between;
 }
 
+.confirm-btn {
+    background: var(--purplish-blue);
+}
+
+.confirm-btn:hover {
+    filter: brightness(2);
+}
+
 /* step 5 */
 
 .step-5-section .container {
@@ -440,6 +488,8 @@ button {
     margin-bottom: 2rem;
     color: var(--marine-blue);
 }
+
+
 
 /* media queries */
 
