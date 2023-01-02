@@ -11,6 +11,8 @@ let addOnsEl = document.querySelectorAll(".step-3-section label input")
 let twoMonthsFreeEl = document.querySelectorAll(".two-months-free")
 let plansPrices = document.querySelectorAll(".plans .gray-text")
 let addOnsPrices = document.querySelectorAll(".step-3-section label .purple-text")
+let addOnsContainerEl = document.querySelector(".plan-add-ons-container")
+let totalPriceEl = document.querySelector(".confirm-total .purple-text")
 
 // global variables
 let selectedPlanClass = "arcade-plan"
@@ -23,6 +25,7 @@ forms.forEach(form => {
     form.addEventListener("submit", (e) => {
         e.preventDefault()
         if (form.parentElement.parentElement.classList.contains("step-3-section")) {
+            addons = []
             addOnsEl.forEach(addon => {
                 if (addon.checked) {
                     addons.push(addon.value)
@@ -30,7 +33,8 @@ forms.forEach(form => {
             })
         }
         if (form.parentElement.parentElement.classList.contains("step-3-section")) {
-            console.log(selectedPlanClass, period, addons)
+            let generatedSummaryHtml = generateSummary(selectedPlanClass, period, addons)
+            addOnsContainerEl.innerHTML = generatedSummaryHtml
         }
     })
 })
@@ -163,9 +167,36 @@ function togglePrices(p) {
         addOnsPrices[1].innerHTML = "+$2/mo"
         addOnsPrices[2].innerHTML = "+$2/mo"
     }
-    
 }
 
-
-
+function generateSummary(selectedPlan, periodOfTime, addOns) {
+    let plan = document.querySelectorAll(`.${selectedPlan} p`)
+    let divAddOn = ``
+    let totalPrice = Number(plan[1].innerHTML.match(/\d+/)[0])
+    addOns.forEach(addon => {
+        let addOnEl = document.querySelector(`.${addon}`)
+        let nameOfAddOn = addOnEl.querySelector(".bold-blue-text").innerHTML
+        let priceOfAddOn = addOnEl.querySelector(".purple-text").innerHTML
+        totalPrice += Number(priceOfAddOn.match(/\d+/)[0])
+        divAddOn += `
+        <div>
+            <p class="gray-text small">${nameOfAddOn}</p>
+            <p class="bold-blue-text small">${priceOfAddOn}</p>
+        </div>
+        `
+    })
+    let newHtml = `
+    <div class="confirm-plan">
+    <div>
+        <p class="bold-blue-text">${plan[0].innerHTML} (${periodOfTime})</p>
+        <a class="gray-text small" href="#">Change</a>
+    </div>
+    <p class="bold-blue-text">${plan[1].innerHTML}</p>
+    </div>
+    <div class="confirm-add-ons">${divAddOn}</div>
+    `
+    totalPriceEl.innerHTML = `+$${totalPrice}/${plan[1].innerHTML.split("/")[1]}`
+    console.log(totalPrice)
+    return newHtml
+}
 
