@@ -217,13 +217,30 @@ button {
     cursor: pointer;
 }
 
-.step-1-section input:focus {
+.step-1-section input:focus, .step-1-section input.invalid-input:focus {
     outline: none;
     border: 1px solid var(--purplish-blue);
 }
 
-.step-1-section input:hover {
+.step-1-section input:hover, .step-1-section input.invalid-input:hover {
     border: 1px solid var(--purplish-blue);
+}
+
+.step-1-section input.invalid-input {
+    border: 1px solid var(--strawberry-red);
+}
+
+.step-1-section .form-body div {
+    position: relative;
+}
+
+.error-msg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.2rem;
+    transform: translateY(25%);
+    color: var(--strawberry-red);
 }
 
 .wrong-input {

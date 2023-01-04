@@ -50,15 +50,18 @@
                         <div class="form-body">
                             <div>
                                 <label for="name-input">Name</label><br>
-                                <input type="text" name="name" id="name-input" placeholder="e.g. Stephen King">
+                                <input type="text" name="name" id="name-input" placeholder="e.g. Stephen King" required pattern="\D*">
+                                <span class="name-input-error-msg error-msg"></span>
                             </div>
                             <div>
                                 <label for="email-input">Email Address</label><br>
-                                <input type="email" name="email" id="email-input" placeholder="e.g. stephenking@lorem.com">
+                                <input type="email" name="email" id="email-input" placeholder="e.g. stephenking@lorem.com" required>
+                                <span class="email-input-error-msg error-msg"></span>
                             </div>
                             <div>
                                 <label for="phone-number-input">Phone Number</label><br>
-                                <input class="wrong-input" type="text" name="phone-number" id="phone-number-input" placeholder="e.g. +1 234 567 890">
+                                <input type="text" name="phone-number" id="phone-number-input" placeholder="e.g. +1 234 567 890" required pattern="[0-9+\s]*">
+                                <span class="phone-number-input-error-msg error-msg"></span>
                             </div>
                         </div>
                         <div class="form-footer justify-end">

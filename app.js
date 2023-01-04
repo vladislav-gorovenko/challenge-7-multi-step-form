@@ -13,6 +13,15 @@ let plansPrices = document.querySelectorAll(".plans .gray-text")
 let addOnsPrices = document.querySelectorAll(".step-3-section label .purple-text")
 let addOnsContainerEl = document.querySelector(".plan-add-ons-container")
 let totalPriceEl = document.querySelector(".confirm-total .purple-text")
+// form validation variables
+let firstFormEl = document.querySelector(".step-1-section form")
+let nameInputEl = document.querySelector("#name-input")
+let emailInputEl = document.querySelector("#email-input")
+let phoneNumberEl = document.querySelector("#phone-number-input")
+// error msgs
+let nameInputErrorEl = document.querySelector(".name-input-error-msg")
+let emailInputErrorEl = document.querySelector(".email-input-error-msg")
+let phoneNumberErrorEl = document.querySelector(".phone-number-input-error-msg")
 
 // global variables
 let selectedPlanClass = "arcade-plan"
@@ -31,8 +40,6 @@ forms.forEach(form => {
                     addons.push(addon.value)
                 }
             })
-        }
-        if (form.parentElement.parentElement.classList.contains("step-3-section")) {
             let generatedSummaryHtml = generateSummary(selectedPlanClass, period, addons)
             addOnsContainerEl.innerHTML = generatedSummaryHtml
         }
@@ -41,8 +48,16 @@ forms.forEach(form => {
 
 nextBtnsEl.forEach(btn => {
     btn.addEventListener('click', (e)=> {
-        changeSelectedStep(e, "+")
+        if (!e.target.parentElement.parentElement.parentElement.parentElement.classList.contains("step-1-section")) {
+            changeSelectedStep(e, "+")
+        } else {
+            validateForm() 
+            if (nameInputEl.validity.valid && emailInputEl.validity.valid && phoneNumberEl.validity.valid) {
+                changeSelectedStep(e, "+")
+            }
+        }
     })
+    
 })
 
 backBtnsEl.forEach(btn => {
@@ -70,9 +85,6 @@ switchInputEl.addEventListener("click", (e) => {
     toggleTwoMonths()
     togglePrices(period)
 })
-
-
-
 
 // functions
 
@@ -196,7 +208,75 @@ function generateSummary(selectedPlan, periodOfTime, addOns) {
     <div class="confirm-add-ons">${divAddOn}</div>
     `
     totalPriceEl.innerHTML = `+$${totalPrice}/${plan[1].innerHTML.split("/")[1]}`
-    console.log(totalPrice)
     return newHtml
 }
 
+// validation
+function validateForm() {
+    validateName()
+    validateEmail()
+    validateNumber()
+}
+
+function validateName() {
+    if (nameInputEl.validity.valueMissing) {
+        nameInputEl.setCustomValidity(" ")
+        nameInputErrorEl.innerHTML = "This field is required"
+        if (!nameInputEl.classList.contains("invalid-input")) {
+            nameInputEl.classList.add("invalid-input")
+        }  
+    } else if (nameInputEl.validity.patternMismatch) {
+        nameInputEl.setCustomValidity(" ") 
+        nameInputErrorEl.innerHTML = "Please, write your name"
+        if (!nameInputEl.classList.contains("invalid-input")) {
+            nameInputEl.classList.add("invalid-input")
+        }  
+    } else {
+        nameInputEl.setCustomValidity("") 
+        nameInputEl.reportValidity()
+        nameInputErrorEl.innerHTML = ""
+        nameInputEl.classList.remove("invalid-input")
+    }
+}
+
+function validateEmail() {
+    if (emailInputEl.validity.valueMissing) {
+        emailInputEl.setCustomValidity(" ")
+        emailInputErrorEl.innerHTML = "This field is required"
+        if (!emailInputEl.classList.contains("invalid-input")) {
+            emailInputEl.classList.add("invalid-input")
+        }  
+    } else if (emailInputEl.validity.typeMismatch) {
+        emailInputEl.setCustomValidity(" ")
+        emailInputErrorEl.innerHTML = "Please, write your email"
+        if (!emailInputEl.classList.contains("invalid-input")) {
+            emailInputEl.classList.add("invalid-input")
+        }  
+    } else {
+        emailInputEl.setCustomValidity("")
+        emailInputEl.reportValidity()
+        emailInputErrorEl.innerHTML = ""
+        emailInputEl.classList.remove("invalid-input")
+    }
+}
+
+function validateNumber() {
+    if (phoneNumberEl.validity.valueMissing) {
+        phoneNumberEl.setCustomValidity(" ")
+        phoneNumberErrorEl.innerHTML = "This field is required"
+        if (!phoneNumberEl.classList.contains("invalid-input")) {
+            phoneNumberEl.classList.add("invalid-input")
+        }  
+    } else if (phoneNumberEl.validity.patternMismatch) {
+        phoneNumberEl.setCustomValidity(" ") 
+        phoneNumberErrorEl.innerHTML = "Please, write your number"
+        if (!phoneNumberEl.classList.contains("invalid-input")) {
+            phoneNumberEl.classList.add("invalid-input")
+        }  
+    } else {
+        phoneNumberEl.setCustomValidity("") 
+        phoneNumberEl.reportValidity()
+        phoneNumberErrorEl.innerHTML = ""
+        emailInputEl.classList.remove("invalid-input")
+    }
+}
