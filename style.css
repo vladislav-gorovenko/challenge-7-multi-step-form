@@ -71,6 +71,10 @@ button {
     cursor: pointer;
 }
 
+.header-mobile, .footer-mobile {
+    display: none;
+}
+
 /* navigation section */
 
 .sidebar-navigation {
@@ -81,14 +85,14 @@ button {
     padding: 2rem 3rem;
 }
 
-.step-link {
+.step-link, .step-link-mobile{
     display: flex;
     align-items: center;
     margin-top: 3rem;
     color: var(--white);
 }
 
-.step-link > p {
+.step-link > p, .step-link-mobile > p{
     padding: 1rem 1.5rem;
     border-radius: 50%;
     margin-right: 1rem;
@@ -96,13 +100,13 @@ button {
     font-weight: 700;
 }
 
-.step-link div p:nth-of-type(1){
+.step-link div p:nth-of-type(1), .step-link-mobile div p:nth-of-type(1) {
     font-weight: 400;
     font-size: 1.4rem;
     color: var(--cool-gray);
 }
 
-.step-link div p:nth-of-type(2){
+.step-link div p:nth-of-type(2), .step-link-mobile div p:nth-of-type(2){
     font-weight: 500;
 }
 
@@ -512,3 +516,98 @@ button {
 
 /* - Mobile: 375px
 - Desktop: 1440px */
+
+@media (max-width: 940px) {
+
+    .main-container {
+        grid-template-columns: 1fr;
+        z-index: 1;
+        height: auto;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+
+        justify-content: flex-start;
+    }
+
+    .container {
+        padding: 2rem;
+    }
+
+    .sidebar-navigation {
+        display: none;
+    }
+
+    .header-mobile {
+        display: block;
+        position: fixed;
+        height: 25vh;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-image: url(./images/bg-sidebar-mobile.svg);
+        background-position: top left;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .step-link-mobile + .step-link-mobile {
+        margin-left: 2rem;
+    }
+
+    .main-container {
+        margin-top: 20vh;
+        margin-bottom: 10rem;
+        justify-self: flex-start;
+        align-self: flex-start;
+    }
+
+    /* generic step section */
+
+    .step-section form {
+        padding: 1rem 0;
+        grid-template-rows: auto 1fr;
+    }
+
+    .form-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        background: var(--white);
+    }
+
+    /* step 1 */
+
+    .step-1-section .form-body {
+        margin-top: 2rem;
+    }
+
+    /* step 2 */
+
+    .step-2-section .form-body {
+        grid-template-rows: 1fr auto;
+    }
+
+    .plans {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, auto);
+        gap: 1.5rem;
+        padding-top: 2rem;
+    }
+
+    .plans > div {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .plans > div > div {
+        margin-left: 1.5rem;
+    }
+
+    /* step 3 */
+}

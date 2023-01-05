@@ -118,6 +118,13 @@ function clearAllStepLinks() {
     })
 }
 
+function clearAllStepLinksMobile() {
+    let stepLinksMobile = document.querySelectorAll(".step-link-mobile") 
+    stepLinksMobile.forEach(step => {
+        step.classList.remove("selected-step")
+    })
+}
+
 function clearAllStepSectionsActiveStatus() {
     let stepSections = document.querySelectorAll(".step-section")
     stepSections.forEach(stepSection => {
@@ -136,12 +143,15 @@ function changeSelectedStep(event, action) {
         stepSectionEl = document.querySelector(".step-5-section")
     }
     let stepLinkEl = document.querySelectorAll(".step-link")[newNumber-1]
+    let stepLinkMobileEl = document.querySelectorAll(".step-link-mobile")[newNumber-1]
     // making sure there is no active step links and step sections 
     clearAllStepLinks()
     clearAllStepSectionsActiveStatus()
+    clearAllStepLinksMobile()
     // activating step link and step section
     stepSectionEl.classList.add("active")
     stepLinkEl.classList.add("selected-step")
+    stepLinkMobileEl.classList.add("selected-step")
 }
 
 function clearAllPlans() {
