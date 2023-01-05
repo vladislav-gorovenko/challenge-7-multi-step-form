@@ -552,6 +552,7 @@ button {
         flex-direction: row;
         justify-content: center;
         align-items: flex-start;
+        padding: 0;
     }
 
     .step-link-mobile + .step-link-mobile {
@@ -559,10 +560,11 @@ button {
     }
 
     .main-container {
-        margin-top: 20vh;
+        margin-top: 15vh;
         margin-bottom: 10rem;
         justify-self: flex-start;
         align-self: flex-start;
+        flex: 0 1 500px;
     }
 
     /* generic step section */
@@ -610,4 +612,71 @@ button {
     }
 
     /* step 3 */
+
+    .step-3-section .form-body {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding-top: 2rem;
+        margin-bottom: 0rem;
+    }
+
+    /* step 4 */
+    .step-4-section .form-body {
+        padding-top: 2rem;  
+    }
+}
+
+@media (max-width: 500px) {
+
+    .container {
+        width: 80vw;
+    }
+
+    .form-footer {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+    
+    .description {
+        margin-top: 0.8rem;
+    }
+
+    .step-section form {
+        padding: 0;
+    }
+
+    .next-btn, .back-btn {
+        padding: 1.5rem 2.5rem;
+        font-size: 1.5rem;
+    }
+
+    .bold-blue-text {
+        margin-bottom: 0.1rem;
+    }
+
+    .small {
+        font-size: 1.2rem;
+    }
+
+    .plans > div {
+        padding: 1rem;
+    }
+
+    .step-3-section .form-body label {
+        padding: 1.5rem;
+    }
+
+    .step-3-section .form-body label div {
+        width: 60%;
+    }
+
+    .step-5-section {
+        padding: 5rem 0;
+    }
+
 }
